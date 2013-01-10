@@ -19,8 +19,8 @@
 // Tibor Koleszar <oldw@debian.org>
 // H-7400 Kaposvar, Somssich Pal str. 4.
 
-#ifndef __CONFIG_H_
-#define __CONFIG_H_
+#ifndef RESTARTD_CONFIG_H
+#define RESTARTD_CONFIG_H
 
 #include <sys/types.h>
 #include <dirent.h>
@@ -34,25 +34,22 @@
 #define DEFAULT_CONFIG "/etc/restartd.conf"
 #define VERSION "0.2.1"
 
-int debug;			// Debug
+int debug;  // Debug
 int config_process_number;
 int check_interval;
 int foreground;
 struct config_process_type *config_process;
 char *config_file;
 
-typedef struct config_process_type
-{
-
+typedef struct config_process_type {
   char name[64];
   char regexp[128];
   char not_running[256];
   char running[256];
   char processes[256];
   char status[32];
-
 } config_process_type;
 
-int read_config ( /* char *config_file */ );
+int read_config(/* char *config_file */);
 
-#endif
+#endif //RESTARTD_CONFIG_H
