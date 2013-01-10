@@ -32,7 +32,7 @@
 #include <fcntl.h>
 
 #define DEFAULT_CONFIG "/etc/restartd.conf"
-#define VERSION "0.2.1"
+#define VERSION "0.2.2"
 
 int debug;  // Debug
 int config_process_number;
