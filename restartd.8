@@ -1,0 +1,42 @@
+.TH RESTARTD 8 "14 Sep 2006" "" ""
+.SH NAME
+restartd \- process checker and/or reloader
+.SH DESCRIPTION
+
+Restartd is a daemon for checking running and not running processes. It
+reads the /proc directory every n seconds and does a POSIX regexp
+on the process names. You can execute a script or a program if the
+process is or is not running.
+
+For executing, restard uses system(3).
+
+For logging, restartd using syslog with LOG_INFO and
+LOG_ERR facilities.
+
+.SH OPTIONS
+restartd follows the GNU command line syntax.
+.TP
+.B -h, --help
+Displays a little help.
+.TP
+.B -v, --version
+Show the version number and quit.
+.TP
+.B -d, --debug
+Add very limited debugging.
+.TP
+.B -i --interval
+The process check interval in seconds. The default is 20.
+.TP
+.B -c --config
+Use a different configuration file instead of /etc/restartd.conf.
+.TP
+.B -f --foreground
+Run restartd in foreground without detaching from the controlling
+terminal.
+.SH AUTHOR
+This manual page was written by Tibor Koleszar <t.koleszar@somogy.hu>
+and updated by Aur\['e]lien G\['E]R\[^O]ME <ag@roxor.cx> for the Debian
+GNU/Linux system.
+
+Last modify: Thu, 14 Sep 2006 22:42:57 +0200

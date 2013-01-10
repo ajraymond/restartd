@@ -1,0 +1,44 @@
+.TH RESTARTD 8 "14 Sep 2006" "" ""
+.SH NAME
+restartd \- moniteur et red\['e]marreur de processus
+.SH DESCRIPTION
+
+Restartd est un d\['e]mon qui v\['e]rifie si des processus
+s'ex\['e]cutent ou pas. Il lit le r\['e]pertoire /proc toutes les n
+secondes et effectue une expression rationnelle POSIX sur les noms
+de processus. Vous pouvez ex\['e]cuter un script ou un programme si
+le processus s'ex\['e]cute ou pas.
+
+Pour l'ex\['e]cution, restard utilise system(3).
+
+Pour la journalisation, restartd utilise syslog avec les types de
+traitement LOG_INFO et LOG_ERR.
+
+.SH OPTIONS
+restartd suit la syntaxe des lignes de commandes GNU.
+.TP
+.B -h, --help
+Affiche un peu d'aide.
+.TP
+.B -v, --version
+Montre le num\['e]ro de version et quitte.
+.TP
+.B -d, --debug
+Ajoute des informations de d\['e]bogage très limit\['e]es.
+.TP
+.B -i --interval
+L'intervalle de v\['e]rification des processus en secondes. Le
+d\['e]faut est de 20.
+.TP
+.B -c --config
+Utilise un fichier de configuration autre que /etc/restartd.conf.
+.TP
+.B -f --foreground
+Ex\['e]cute restartd en avant-plant sans le d\['e]tacher du terminal
+de contr\[^o]le.
+.SH AUTHOR
+Cette page de manuel a \['e]t\['e] \['e]crite par Tibor Koleszar
+<t.koleszar@somogy.hu> et mise à jour par Aur\['e]lien G\['E]R\[^O]ME
+<ag@roxor.cx> pour le syst\[`e]me Debian GNU/Linux.
+
+Derni\[`e]re modification : Thu, 14 Sep 2006 22:42:57 +0200
