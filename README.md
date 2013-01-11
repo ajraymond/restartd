@@ -12,5 +12,16 @@ From the man page:
     process is or is not running.
 
 
-Please see [this page](http://packages.qa.debian.org/r/restartd.html) for the corresponding Debian package.
+Links
+-----
+* [Debian QA page for the restartd package](http://packages.qa.debian.org/r/restartd.html)
+* [Debian packaging repository for the restartd package](http://packages.qa.debian.org/r/restartd.html)
+
+
+Changelog
+---------
+v0.2.3:
+#######
+- Project now has a standalone upstream
+- Rename LICENCE to LICENSE
 
