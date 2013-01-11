@@ -3,8 +3,8 @@
 C_ARGS = -Wall -O2
 CC = gcc
 INS = /usr/bin/install
-
-all:	restartd
+VERSION = $(shell cat version)
+all: restartd
 
 install: restartd
 	$(INS) -o root -g root -m 0640 restartd.conf $(DESTDIR)/etc
@@ -15,12 +15,12 @@ install: restartd
 clean:
 	rm -f *.o restartd
 
-restartd:	main.o config.o
-	$(CC) -o restartd main.o config.o
-#	strip restartd
+restartd: main.o config.o
+	$(CC) -o restartd -DVERSION='"$(VERSION)"' main.o config.o
+# strip restartd
 
-main.o:	main.c
-	$(CC) $(C_ARGS) -c main.c
+main.o: main.c
+	$(CC) $(C_ARGS) -DVERSION='"$(VERSION)"' -c main.c
 
-config.o:	config.c
-	$(CC) $(C_ARGS) -c config.c
+config.o: config.c
+	$(CC) $(C_ARGS) -DVERSION='"$(VERSION)"' -c config.c
