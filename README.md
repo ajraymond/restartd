@@ -16,6 +16,7 @@ Links
 -----
 * [Debian QA page for the restartd package](http://packages.qa.debian.org/r/restartd.html)
 * [Debian packaging repository for the restartd package](https://github.com/ajraymond/restartd-debian)
+* [Ubuntu bug tracker for the restartd package](https://launchpad.net/ubuntu/+source/restartd/+bugs)
 
 
 Changelog
