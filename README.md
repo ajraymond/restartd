@@ -15,13 +15,12 @@ From the man page:
 Links
 -----
 * [Debian QA page for the restartd package](http://packages.qa.debian.org/r/restartd.html)
-* [Debian packaging repository for the restartd package](http://packages.qa.debian.org/r/restartd.html)
+* [Debian packaging repository for the restartd package](https://github.com/ajraymond/restartd-debian)
 
 
 Changelog
 ---------
-v0.2.3:
-#######
+### v0.2.3:
 - Project now has a standalone upstream
 - Rename LICENCE to LICENSE
 
