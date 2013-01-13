@@ -2,7 +2,7 @@ config.c
 config.h
 COPYRIGHT
 LICENSE
-main.c
+restartd.c
 Makefile
 restartd.8
 restartd.conf

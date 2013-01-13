@@ -15,12 +15,12 @@ install: restartd
 clean:
 	rm -f *.o restartd
 
-restartd: main.o config.o
-	$(CC) -o restartd -DVERSION='"$(VERSION)"' main.o config.o
+restartd: restartd.o config.o
+	$(CC) -o restartd -DVERSION='"$(VERSION)"' restartd.o config.o
 # strip restartd
 
-main.o: main.c
-	$(CC) $(C_ARGS) -DVERSION='"$(VERSION)"' -c main.c
+restartd.o: restartd.c
+	$(CC) $(C_ARGS) -DVERSION='"$(VERSION)"' -c restartd.c
 
 config.o: config.c
 	$(CC) $(C_ARGS) -DVERSION='"$(VERSION)"' -c config.c
