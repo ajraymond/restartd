@@ -21,6 +21,10 @@ Links
 
 Changelog
 ---------
+### v0.2.4:
+- Rename main.c to restartd.c
+- Update makefile to support debuild harding options
+
 ### v0.2.3:
 - Project now has a standalone upstream
 - Rename LICENCE to LICENSE
