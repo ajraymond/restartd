@@ -1,9 +1,15 @@
 # Restartd Makefile
 
-C_ARGS = -Wall -O2
 CC = gcc
+CFLAGS += -DVERSION='"$(VERSION)"' -Wall
+
 INS = /usr/bin/install
+
 VERSION = $(shell cat version)
+
+###############################################################################
+.PHONY: all install
+
 all: restartd
 
 install: restartd
@@ -16,11 +22,7 @@ clean:
 	rm -f *.o restartd
 
 restartd: restartd.o config.o
-	$(CC) -o restartd -DVERSION='"$(VERSION)"' restartd.o config.o
 # strip restartd
 
 restartd.o: restartd.c
-	$(CC) $(C_ARGS) -DVERSION='"$(VERSION)"' -c restartd.c
-
 config.o: config.c
-	$(CC) $(C_ARGS) -DVERSION='"$(VERSION)"' -c config.c
