@@ -1,0 +1,10 @@
+restartd - A process-restarting daemon - Changelog
+==================================================
+
+What's new in v0.2.4:
+  * Rename main.c to restartd.c
+  * Update makefile to support debuild harding options
+
+What's new in v0.2.3
+  * Project now has a standalone upstream
+  * Rename LICENCE to LICENSE
