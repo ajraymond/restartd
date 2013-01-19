@@ -1,24 +1,24 @@
-// restartd - Process checker and/or restarter daemon
-// Copyright (C) 2000-2002 Tibor Koleszar <oldw@debian.org>
-// Copyright (C) 2006 Aurélien GÉRÔME <ag@roxor.cx>
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-//
-// Tibor Koleszar <oldw@debian.org>
-// H-7400 Kaposvar, Somssich Pal str. 4.
-
+/* restartd - Process checker and/or restarter daemon
+ * Copyright (C) 2000-2002 Tibor Koleszar <oldw@debian.org>
+ * Copyright (C) 2006 Aurélien GÉRÔME <ag@roxor.cx>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ * Tibor Koleszar <oldw@debian.org>
+ * H-7400 Kaposvar, Somssich Pal str. 4.
+ */
 #include <sys/types.h>
 #include <dirent.h>
 #include <stdio.h>
@@ -35,7 +35,7 @@
 
 #include "config.h"
 
-// SIGTERM & SIGHUP handler
+/* SIGTERM & SIGHUP handler */
 void got_signal(int sig)
 {
     if (sig == SIGTERM) {
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     check_interval = 20;
     foreground = 0;
 
-    // Options
+    /* Options */
     config_file = strdup(DEFAULT_CONFIG);
 
     for(i = 0; i < argc; i++) {
@@ -127,14 +127,14 @@ int main(int argc, char *argv[])
     proc_cmdline_name = (char *) malloc(1024);
     regc = malloc(1024);
   
-    // Catch signals
+    /* Catch signals */
     signal(SIGTERM, got_signal);
     signal(SIGHUP, got_signal);
 
-    // Fork
+    /* Fork */
     if (foreground == 1 || !(child = fork())) {
-        // generic daemon stuff from http://www.aarnet.edu.au/~gdt/articles/2003-09-nowhere-daemon/daemon.html
-        // added by cwarden@postica.com - 041216
+        /* generic daemon stuff from http://www.aarnet.edu.au/~gdt/articles/2003-09-nowhere-daemon/daemon.html
+           added by cwarden@postica.com - 041216 */
         if (!foreground) {
             if (setsid() == (pid_t) (-1)) {
                 fprintf(stderr, "setsid() failed\n");
@@ -207,7 +207,7 @@ int main(int argc, char *argv[])
          
                     proc_cmdline_str[proc_cmdline_str_length] = 0;
          
-                    // Check process
+                    /* Check process */
                     for(i=0; i<config_process_number; i++) {
                         regcomp(regc, config_process[i].regexp, REG_EXTENDED || REG_ICASE);
                         if (!regexec(regc, proc_cmdline_str, r_nmatch, r_match, 0)) {
