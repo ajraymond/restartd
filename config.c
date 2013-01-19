@@ -32,6 +32,8 @@
 
 #include "config.h"
 
+#define MAX_LINE_LENGTH 1024
+
 int read_config(void)
 {
     FILE *config_fd;
@@ -54,8 +56,8 @@ int read_config(void)
 
     config_process_number = 0;
 
-    line1 = (char *) malloc(1024);
-    line2 = (char *) malloc(1024);
+    line1 = (char *) malloc(MAX_LINE_LENGTH);
+    line2 = (char *) malloc(MAX_LINE_LENGTH);
 
     if ((config_fd = fopen(config_file, "rt")) == NULL) {
         fprintf(stderr, "Error at opening config file: %s\n", config_file);
@@ -63,7 +65,7 @@ int read_config(void)
         _exit(0);
     }
 
-    while(fgets(line1, 1024, config_fd) != NULL) {
+    while(fgets(line1, MAX_LINE_LENGTH, config_fd) != NULL) {
         j = 0;
 
         for(i=0; i<strlen(line1); i++) {
