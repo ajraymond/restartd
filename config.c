@@ -57,10 +57,10 @@ int read_config(void)
         j = 0;
 
         for(i=0; i<strlen(line1); i++) {
-            if (line1[i] == 10 || line1[i] == 13 || line1[i] == 9
-                || line1[i] == 32) {
-                if (line2[j - 1] != 32 && j > 0) {
-                    line2[j] = 32;
+            if (line1[i] == '\n' || line1[i] == '\r' || line1[i] == '\t'
+                || line1[i] == ' ') {
+                if (line2[j - 1] != ' ' && j > 0) {
+                    line2[j] = ' ';
                     j++;
                 }
             } else {
@@ -71,14 +71,14 @@ int read_config(void)
 
         line2[j] = 0;
 
-        if (line2[0] != 35 && strlen(line2) > 0) {
+        if (line2[0] != '#' && strlen(line2) > 0) {
             j = 0;
             i = 0;
             lines = 0;
             sep = 0;
 
             while(j < strlen(line2)) {
-                if (line2[j] == 32 && sep != 1) {
+                if (line2[j] == ' ' && sep != 1) {
                     line1[i] = 0;
 
                     if (debug) {
@@ -108,11 +108,11 @@ int read_config(void)
                     lines++;
                 }
 
-                if (line2[j] == 34) {
+                if (line2[j] == '"') {
                     sep++;
                 }
 
-                if ((line2[j] != 32 || sep == 1) && line2[j] != 34) {
+                if ((line2[j] != ' ' || sep == 1) && line2[j] != '"') {
                     line1[i] = line2[j];
                     i++;
                 }
