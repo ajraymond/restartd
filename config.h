@@ -23,15 +23,6 @@
 #ifndef RESTARTD_CONFIG_H
 #define RESTARTD_CONFIG_H
 
-#include <sys/types.h>
-#include <dirent.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-
 #define DEFAULT_CONFIG "/etc/restartd.conf"
 
 int debug;
