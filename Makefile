@@ -1,7 +1,7 @@
 # Restartd Makefile
 
-CC = gcc
-CFLAGS += -DVERSION='"$(VERSION)"' -Wall
+CC ?= gcc
+CFLAGS += -DVERSION='"$(VERSION)"' -Wall -pedantic
 
 INS = /usr/bin/install
 
