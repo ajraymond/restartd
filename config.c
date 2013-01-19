@@ -105,16 +105,16 @@ int read_config(void)
                                  64, "%s", line1);
                     }
                     if (lines == 1) {
-                        snprintf(config_process[config_process_number].
-                                 regexp, 128, "%s", line1);
+                        snprintf(config_process[config_process_number].regexp,
+                                 128, "%s", line1);
                     }
                     if (lines == 2) {
-                        snprintf(config_process[config_process_number].
-                                 not_running, 256, "%s", line1);
+                        snprintf(config_process[config_process_number].not_running,
+                                 256, "%s", line1);
                     }
                     if (lines == 3) {
-                        snprintf(config_process[config_process_number].
-                                 running, 256, "%s", line1);
+                        snprintf(config_process[config_process_number].running,
+                                 256, "%s", line1);
                     }
 
                     lines++;
