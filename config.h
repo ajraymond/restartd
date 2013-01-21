@@ -42,5 +42,6 @@ typedef struct config_process_type {
 } config_process_type;
 
 int read_config(/* char *config_file */);
+void dump_config(void);
 
 #endif /* RESTARTD_CONFIG_H */

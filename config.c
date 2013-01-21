@@ -150,3 +150,16 @@ int read_config(void)
 
     return 0;
 }
+
+void dump_config(void) {
+    int i;
+
+    for(i=0; i<config_process_number; i++) {
+        printf("ID=%d\n  name=%s\n  regexp=%s\n  running=%s\n  not_running=%s\n", i,
+            config_process[i].name,
+            config_process[i].regexp,
+            config_process[i].running,
+            config_process[i].not_running);
+    }
+
+}

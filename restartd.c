@@ -67,6 +67,7 @@ int main(int argc, char *argv[])
     regmatch_t r_match[256];
     pid_t child;
     time_t now;
+    int list_only;
 
     debug = 0;
     check_interval = 20;
@@ -74,6 +75,7 @@ int main(int argc, char *argv[])
 
     /* Options */
     config_file = strdup(DEFAULT_CONFIG);
+    list_only = 0;
 
     for(i = 0; i < argc; i++) {
         if (!strcmp(argv[i], "-c") || !strcmp(argv[i], "--config")) {
@@ -101,6 +103,9 @@ int main(int argc, char *argv[])
                 exit (0);
             }
         }
+        if (!strcmp(argv[i], "-l") || !strcmp(argv[i], "--list")) {
+            list_only = 1;
+        }
         if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help")) {
             printf("restartd %s - process restarter and checker daemon\n"
                     "Copyright 2000-2002 Tibor Koleszar <oldw@debian.org>\n"
@@ -111,6 +116,7 @@ int main(int argc, char *argv[])
                     "  -d               : set debug on (poor)\n"
                     "  -f               : run in foreground\n"
                     "  -i <interval_sec>: the check interval in second\n"
+                    "  -l               : list configuration options\n"
                     "  -h               : help\n\n", VERSION);
         }
     }
@@ -118,6 +124,10 @@ int main(int argc, char *argv[])
     config_process = malloc(sizeof(struct config_process_type) * 128);
   
     read_config();
+    if (list_only) {
+        dump_config();
+        exit(0);
+    }
   
     syslog(LOG_INFO, "Config file has been read. Found %d process to check.",
            config_process_number);
