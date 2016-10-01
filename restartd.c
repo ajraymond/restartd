@@ -118,6 +118,7 @@ int main(int argc, char *argv[])
                     "  -i <interval_sec>: the check interval in second\n"
                     "  -l               : list configuration options\n"
                     "  -h               : help\n\n", VERSION);
+	    exit(0);
         }
     }
 
@@ -187,6 +188,10 @@ int main(int argc, char *argv[])
         }
 
         out_proc = fopen("/var/run/restartd.pid", "wt");
+	if (!out_proc) {
+		syslog(LOG_ERR, "Failed to open /var/run/restartd.pid");
+		return -1;
+	}
         fprintf(out_proc, "%d", getpid());
         fclose(out_proc);
 
@@ -244,9 +249,9 @@ int main(int argc, char *argv[])
                if (strlen(config_process[i].processes) > 0) {
                    if (strlen(config_process[i].running) > 0) {
                        strcpy(config_process[i].status, "running");
-                       syslog(LOG_INFO, "%s is running, executing '%s'",
+                       /* syslog(LOG_INFO, "%s is running, executing '%s'",
                               config_process[i].name,
-                              config_process[i].running);
+                              config_process[i].running); */
                        system(config_process[i].running);
                     } else {
                         strcpy(config_process[i].status, "running");
