@@ -35,6 +35,13 @@
 
 #include "config.h"
 
+int debug;
+int config_process_number;
+int check_interval;
+int foreground;
+struct config_process_type *config_process;
+char *config_file;
+
 /* SIGTERM & SIGHUP handler */
 void got_signal(int sig)
 {

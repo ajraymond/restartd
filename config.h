@@ -25,12 +25,12 @@
 
 #define DEFAULT_CONFIG "/etc/restartd.conf"
 
-int debug;
-int config_process_number;
-int check_interval;
-int foreground;
-struct config_process_type *config_process;
-char *config_file;
+extern int debug;
+extern int config_process_number;
+extern int check_interval;
+extern int foreground;
+extern struct config_process_type *config_process;
+extern char *config_file;
 
 typedef struct config_process_type {
   char name[64];
