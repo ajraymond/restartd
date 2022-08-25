@@ -57,7 +57,11 @@ int read_config(void)
     config_process_number = 0;
 
     line1 = (char *) malloc(MAX_LINE_LENGTH);
+    if (!line1)
+      oom_failure();
     line2 = (char *) malloc(MAX_LINE_LENGTH);
+    if (!line2)
+      oom_failure();
 
     if ((config_fd = fopen(config_file, "rt")) == NULL) {
         fprintf(stderr, "Error at opening config file: %s\n", config_file);
