@@ -219,7 +219,10 @@ int main(int argc, char *argv[])
 	  syslog(LOG_ERR, "Failed to open /var/run/restartd.pid");
 	  return -1;
 	}
-        fprintf(out_proc, "%d", getpid());
+        if (fprintf(out_proc, "%d", getpid()) < 0) {
+	  syslog(LOG_ERR, "Failed to write to /var/run/restartd.pid. Exiting.");
+	  return -1;
+	}
         fclose(out_proc);
 
         while(1) {
@@ -274,7 +277,10 @@ int main(int argc, char *argv[])
 	     return -1;
 	   }
 
-           fprintf(out_proc, "%s\n", ctime(&now));
+           if (fprintf(out_proc, "%s\n", ctime(&now)) < 0) {
+	     syslog(LOG_ERR, "Failed to write to /var/run/restartd. Exiting.");
+	     return -1;
+	   }
 
            for(i=0; i<config_process_number; i++) {
                if (strlen(config_process[i].processes) > 0) {
@@ -303,9 +309,12 @@ int main(int argc, char *argv[])
                     strcpy(config_process[i].status, "not running");
                 }
 
-                fprintf(out_proc, "%-12s %-12s      %s\n",
-                        config_process[i].name, config_process[i].status,
-                        config_process[i].processes);
+		if (fprintf(out_proc, "%-12s %-12s      %s\n",
+			    config_process[i].name, config_process[i].status,
+			    config_process[i].processes) < 0) {
+		  syslog(LOG_ERR, "Failed to write to /var/run/restartd. Exiting.");
+		  return -1;
+		}
             }
 
             fclose(out_proc);
