@@ -1,6 +1,7 @@
 /* restartd - Process checker and/or restarter daemon
  * Copyright (C) 2000-2002 Tibor Koleszar <oldw@debian.org>
  * Copyright (C) 2006 Aurélien GÉRÔME <ag@roxor.cx>
+ * Copyright (C) 2022 Maxime Devos <maximedevos@telenet.be>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,5 +44,6 @@ typedef struct config_process_type {
 
 int read_config(/* char *config_file */);
 void dump_config(void);
+void oom_failure(void);
 
 #endif /* RESTARTD_CONFIG_H */

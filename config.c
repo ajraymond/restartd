@@ -57,7 +57,11 @@ int read_config(void)
     config_process_number = 0;
 
     line1 = (char *) malloc(MAX_LINE_LENGTH);
+    if (!line1)
+      oom_failure();
     line2 = (char *) malloc(MAX_LINE_LENGTH);
+    if (!line2)
+      oom_failure();
 
     if ((config_fd = fopen(config_file, "rt")) == NULL) {
         fprintf(stderr, "Error at opening config file: %s\n", config_file);
@@ -155,11 +159,16 @@ void dump_config(void) {
     int i;
 
     for(i=0; i<config_process_number; i++) {
-        printf("ID=%d\n  name=%s\n  regexp=%s\n  running=%s\n  not_running=%s\n", i,
-            config_process[i].name,
-            config_process[i].regexp,
-            config_process[i].running,
-            config_process[i].not_running);
+      if (printf("ID=%d\n  name=%s\n  regexp=%s\n  running=%s\n  not_running=%s\n", i,
+		 config_process[i].name,
+		 config_process[i].regexp,
+		 config_process[i].running,
+		 config_process[i].not_running) < 0) {
+	/* Maybe stdout points to a file and a file system quotum was exceeded? */
+	fprintf(stderr, "Failed to dump the configuration. Exiting.\n");
+	syslog(LOG_ERR, "Failed to dump the configuration. Exiting.");
+	exit(1);
+      }
     }
 
 }
