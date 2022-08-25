@@ -215,6 +215,10 @@ int main(int argc, char *argv[])
         }
 
         out_proc = fopen("/var/run/restartd.pid", "wt");
+	if (!out_proc) {
+	  syslog(LOG_ERR, "Failed to open /var/run/restartd.pid");
+	  return -1;
+	}
         fprintf(out_proc, "%d", getpid());
         fclose(out_proc);
 
@@ -265,6 +269,10 @@ int main(int argc, char *argv[])
            now = time(NULL);
 
            out_proc = fopen("/var/run/restartd", "wt");
+	   if (!out_proc) {
+	     syslog(LOG_ERR, "Failed to open /var/run/restartd");
+	     return -1;
+	   }
 
            fprintf(out_proc, "%s\n", ctime(&now));
 
