@@ -223,7 +223,10 @@ int main(int argc, char *argv[])
 	  syslog(LOG_ERR, "Failed to write to /var/run/restartd.pid. Exiting.");
 	  return -1;
 	}
-        fclose(out_proc);
+        if (fclose(out_proc) < 0) { /* errors can happen when flushing the buffer */
+	  syslog(LOG_ERR, "Failed to write to /var/run/restartd.pid. Exiting.");
+	  return -1;
+	}
 
         while(1) {
             if ((procdir_id = opendir("/proc")) == NULL) {
@@ -317,7 +320,10 @@ int main(int argc, char *argv[])
 		}
             }
 
-            fclose(out_proc);
+	    if (fclose(out_proc) < 0) {
+	      syslog(LOG_ERR, "Failed to write to /var/run/restartd.pid. Exiting.");
+	      return -1;
+	    }
 
             sleep(check_interval);
         }
